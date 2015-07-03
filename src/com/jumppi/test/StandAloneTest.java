@@ -17,6 +17,8 @@ public class StandAloneTest {
 		DB db = DB.getInstance("mysql");
 
 		JSON res = db.getJSON("select * from ucsim");
+		
+		db.close();
 		System.out.println(res.toJsonString());
 	}
 }
