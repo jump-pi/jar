@@ -304,7 +304,14 @@ public class CRUDWiz extends JFrame {
             Class.forName(driver);
             Connection con = DriverManager.getConnection(dataOrigin, username, password);
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM `" + getTableName() + "` WHERE 1=0");
+            
+            ResultSet rs;
+            if (getSubprotocol().equals("mysql")) {
+                rs = stmt.executeQuery("SELECT * FROM `" + getTableName() + "` WHERE 1=0");
+            } else {
+                rs = stmt.executeQuery("SELECT * FROM " + getTableName() + " WHERE 1=0");
+            }
+            
             ResultSetMetaData rsmd = rs.getMetaData();
             int numCols = rsmd.getColumnCount();
             for (int i = 0; i < numCols; i++) {

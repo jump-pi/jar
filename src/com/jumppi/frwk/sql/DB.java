@@ -21,7 +21,7 @@ public class DB {
     protected static ThreadLocal<HashMap<String, Connection>> tConMap;
     protected static boolean monitorDB = false;
     protected final String idCon;
-    protected static IDBConfig dbConfig;
+    protected static IDBConfig dbConfig = null;
     protected static String dbUcsimName = "";
 	protected static String dbUcsimUserame = "";
     protected static String dbUcsimPassword = "";
@@ -63,6 +63,19 @@ public class DB {
         this.idCon = idCon;
     }
 
+    public static void addDescriptor(String idCon, DBDescriptor dbd) {
+    	if (gDbMap == null) {
+            gDbMap = new Hashtable<String, DBDescriptor>();
+    	}        
+    	gDbMap.put(idCon, dbd);
+    }
+
+    
+    public static DB getInstance(DBDescriptor dbd) {
+    	addDescriptor("_defaultCon", dbd);
+    	return getInstance("_defaultCon");
+    }
+    
     
     public static DB getInstance(String idCon) {
     	return getInstance(idCon, dbConfig);
@@ -73,7 +86,9 @@ public class DB {
     	
     	if (gDbMap == null) {
             gDbMap = new Hashtable<String, DBDescriptor>();
-            dbConfig.setup(gDbMap, DB.getDbUcsimName(), DB.getDbUcsimUserame(), DB.getDbUcsimPassword());
+            if (dbConfig != null) {
+                dbConfig.setup(gDbMap, DB.getDbUcsimName(), DB.getDbUcsimUserame(), DB.getDbUcsimPassword());
+            }
     	}        
     	
         DBDescriptor dbd = gDbMap.get(idCon);

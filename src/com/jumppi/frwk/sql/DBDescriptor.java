@@ -13,14 +13,83 @@ public class DBDescriptor {
     public String username;
     public String password;
 
+    public static DBDescriptor getInstance() {
+    	return new DBDescriptor();
+    }
+    
+    public String getProtocol() {
+		return protocol;
+	}
+
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
+	}
+
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getDbName() {
+		return dbName;
+	}
+
+	public void setDbName(String dbName) {
+		this.dbName = dbName;
+	}
+
+	public String getParams() {
+		return params;
+	}
+
+	public void setParams(String params) {
+		this.params = params;
+	}
+
+	public String getJdbcDriver() {
+		return jdbcDriver;
+	}
+
+	public void setJdbcDriver(String jdbcDriver) {
+		this.jdbcDriver = jdbcDriver;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
     public String buildUrl() {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + dbName + "?" + params;
         res = protocol + optServer(server) + optName(dbName) + optParams(params);
         return res;
     }
-    
-    public String buildUrl(String name) {
+
+	public String buildUrl(String name) {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + name + "?" + params;
         res = protocol + optServer(server) + optName(name) + optParams(params);
