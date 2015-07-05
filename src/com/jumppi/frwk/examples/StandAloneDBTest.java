@@ -1,4 +1,4 @@
-package com.jumppi.examples;
+package com.jumppi.frwk.examples;
 
 import com.jumppi.frwk.json.JSON;
 import com.jumppi.frwk.sql.DB;

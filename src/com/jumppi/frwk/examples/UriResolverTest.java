@@ -1,4 +1,4 @@
-package com.jumppi.examples;
+package com.jumppi.frwk.examples;
 
 import java.util.Map;
 

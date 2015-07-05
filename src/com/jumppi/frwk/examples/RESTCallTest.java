@@ -1,4 +1,4 @@
-package com.jumppi.examples;
+package com.jumppi.frwk.examples;
 
 import org.apache.log4j.BasicConfigurator;
 
