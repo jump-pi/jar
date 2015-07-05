@@ -6,5 +6,5 @@ Jump-pi could implement other frameworks like Derby, Spring (REST), Hibernate or
 This version has minimun dependencies with other frameworks and it is intended to be used from Embedded Systems to high scale parallelized systems.  
   
 ## KeyFacts  
-__License__: MIT License
+__License__: [MIT License](https://tldrlegal.com/license/mit-license)
 
