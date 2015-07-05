@@ -181,6 +181,7 @@ public class DBDescriptor {
         res.protocol = protocol;
         res.server = server;
         res.port = port;
+        res.localDbName = localDbName;
         res.dbName = dbName;
         res.params = params;
         res.jdbcDriver = jdbcDriver;
