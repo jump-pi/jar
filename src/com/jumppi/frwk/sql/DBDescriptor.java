@@ -179,6 +179,7 @@ public class DBDescriptor {
     public DBDescriptor clone() {
         DBDescriptor res = new DBDescriptor();
         res.protocol = protocol;
+        res.subprotocol = subprotocol;
         res.server = server;
         res.port = port;
         res.localDbName = localDbName;
