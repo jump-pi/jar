@@ -8,7 +8,7 @@ import com.jumppi.frwk.util.Util;
 public class RESTCallTest {
 
 	/**
-	 *     Modo simulació:
+	 *     Simulation mode:
 	 *     http://localhost:8080/jump/sv?{_ctl:'appl.test.CallTest',_met:'hola',_in:{x:123,y:9876,s:'Hola Coca-Cola'}}	   
 	 */
 
