@@ -4,16 +4,16 @@ import com.jumppi.frwk.util.Util;
 
 public class DBDescriptor {
 
-    public String protocol;
-    public String subprotocol;
+	public String protocol;
+	public String subprotocol;
 	public String server;
-    public String port;
-    public String dbName;
-    public String localDbName;
+	public String port;
+	public String dbName;
+	public String localDbName;
 	public String params;
-    public String jdbcDriver;
-    public String username;
-    public String password;
+	public String jdbcDriver;
+	public String username;
+	public String password;
 
     public static DBDescriptor getInstance() {
     	return new DBDescriptor();
