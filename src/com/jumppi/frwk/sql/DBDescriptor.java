@@ -15,7 +15,6 @@ public class DBDescriptor {
 	public String username;
 	public String password;
 
-	
     public static DBDescriptor getInstance() {
     	return new DBDescriptor();
     }
