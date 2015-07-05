@@ -5,10 +5,12 @@ import com.jumppi.frwk.util.Util;
 public class DBDescriptor {
 
     public String protocol;
-    public String server;
+    public String subprotocol;
+	public String server;
     public String port;
     public String dbName;
-    public String params;
+    public String localDbName;
+	public String params;
     public String jdbcDriver;
     public String username;
     public String password;
@@ -23,6 +25,14 @@ public class DBDescriptor {
 
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
+	}
+
+    public String getSubprotocol() {
+		return subprotocol;
+	}
+
+	public void setSubprotocol(String subprotocol) {
+		this.subprotocol = subprotocol;
 	}
 
 	public String getServer() {
@@ -49,6 +59,14 @@ public class DBDescriptor {
 		this.dbName = dbName;
 	}
 
+    public String getLocalDbName() {
+		return localDbName;
+	}
+
+	public void setLocalDbName(String localDbName) {
+		this.localDbName = localDbName;
+	}
+	
 	public String getParams() {
 		return params;
 	}
@@ -85,17 +103,27 @@ public class DBDescriptor {
     public String buildUrl() {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + dbName + "?" + params;
-        res = protocol + optServer(server) + optName(dbName) + optParams(params);
+        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optDbName(dbName) + optPort(port) + optParams(params) + optLocalDbName(localDbName);
         return res;
     }
 
-	public String buildUrl(String name) {
+	public String buildUrl(String nameDb) {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + name + "?" + params;
-        res = protocol + optServer(server) + optName(name) + optParams(params);
+        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optDbName(nameDb) + optPort(port) + optParams(params);
         return res;
     }
 
+    public String optSubprotocol(String subprotocol) {
+    	String res = "";
+    	if (Util.nvl(subprotocol).equals("")) {
+    		res = "";
+    	} else {
+    		res = ":" + subprotocol;
+    	}
+    	return res;
+    }
+    
     public String optServer(String server) {
     	String res = "";
     	if (Util.nvl(server).equals("")) {
@@ -117,7 +145,7 @@ public class DBDescriptor {
     }
 
     
-    public String optName(String name) {
+    public String optDbName(String name) {
     	String res = "";
     	if (Util.nvl(name).equals("")) {
     		res = "";
@@ -127,6 +155,16 @@ public class DBDescriptor {
     	return res;
     }
 
+    public String optLocalDbName(String name) {
+    	String res = "";
+    	if (Util.nvl(name).equals("")) {
+    		res = "";
+    	} else {
+    		res = ":" + name;
+    	}
+    	return res;
+    }
+    
     public String optParams(String params) {
     	String res = "";
     	if (Util.nvl(params).equals("")) {

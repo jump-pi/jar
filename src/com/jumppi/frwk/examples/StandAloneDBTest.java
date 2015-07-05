@@ -8,7 +8,8 @@ public class StandAloneDBTest {
 
 	public static void main(String[] args) throws Exception {
 		DBDescriptor dbd = DBDescriptor.getInstance();
-		dbd.setProtocol("jdbc:mysql");
+		dbd.setProtocol("jdbc");
+		dbd.setSubprotocol("mysql");
 		dbd.setJdbcDriver("com.mysql.jdbc.Driver");
 		dbd.setServer("127.0.0.1");
 		dbd.setDbName("appl");
