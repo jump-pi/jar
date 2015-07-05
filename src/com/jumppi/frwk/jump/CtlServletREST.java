@@ -80,6 +80,8 @@ public class CtlServletREST extends HttpServlet {
             String tokenHeader = request.getHeader("Authorization");
             String token;
             
+            // In a heavy loaded systems key/value it is advides the use of fast databases such as Redis
+            
             if (!Util.nvl(tokenHeader).equals("")) {
             	int posToken = tokenHeader.indexOf("Bearer");    // Oauth2 Client Credentials  (RFC 6749)
             	token = Util.nvl(tokenHeader.substring(posToken + 7));
