@@ -9,11 +9,9 @@ import com.jumppi.frwk.util.SignalException;
 import com.jumppi.frwk.util.Util;
 
 /**
+ * http://www.ibm.com/developerworks/java/library/j-threads3.html (IBM ThreadLocal)
+ * http://www.theserverside.com/news/1365244/Why-Prepared-Statements-are-important-and-how-to-use-them-properly (PreparedStatements)
  * http://josearrarte.com/blog/tag/aop (Spring)
- * http://www.ibm.com/developerworks/java/library/j-threads3.html (IBM
- * ThreadLocal)
- * http://www.theserverside.com/news/1365244/Why-Prepared-Statements
- * -are-important-and-how-to-use-them-properly (PreparedStatements)
  */
 public class DB {
 
@@ -114,7 +112,7 @@ public class DB {
 
     /*protected static HashMap<String, Connection> getTConMap() {
      if(tConMap.get() == null) {
-     tConMap.set(new HashMap<String, Connection>());
+     	tConMap.set(new HashMap<String, Connection>());
      }
      return tConMap.get();
      }*/
