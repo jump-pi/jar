@@ -1,11 +1,11 @@
-package com.jumppi.test;
+package com.jumppi.examples;
 
 import org.apache.log4j.BasicConfigurator;
 
 import com.jumppi.frwk.json.JSON;
 import com.jumppi.frwk.util.Util;
 
-public class CallTest {
+public class RESTCallTest {
 
 	/**
 	 *     Modo simulació:

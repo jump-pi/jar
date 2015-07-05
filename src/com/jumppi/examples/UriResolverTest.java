@@ -1,4 +1,4 @@
-package com.jumppi.test;
+package com.jumppi.examples;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import com.jumppi.frwk.util.Util;
 // https://code.google.com/p/uri-templates
 // Restlet
 
-public class ResolverTest {
+public class UriResolverTest {
 
 	public static void main (String[] args) {
 		   BasicConfigurator.configure();

@@ -1,10 +1,10 @@
-package com.jumppi.test;
+package com.jumppi.examples;
 
 import com.jumppi.frwk.json.JSON;
 import com.jumppi.frwk.sql.DB;
 import com.jumppi.frwk.sql.DBDescriptor;
 
-public class StandAloneTest {
+public class StandAloneDBTest {
 
 	public static void main(String[] args) throws Exception {
 		DBDescriptor dbd = DBDescriptor.getInstance();
