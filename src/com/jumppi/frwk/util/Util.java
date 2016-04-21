@@ -2128,14 +2128,6 @@ public class Util {
 			
 			ProcessBuilder processBuilder = new ProcessBuilder(vCommand);			
 			Process process = processBuilder.start();
-			StringBuilder sb = new StringBuilder();
-			BufferedReader reader =
-			new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				sb.append(line);
-			}
-			res = sb.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getMessage(), e);
