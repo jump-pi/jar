@@ -2113,6 +2113,38 @@ public class Util {
 	}
 
 
+	public static String executeBatAsync(String[] cmd) {
+		String res = "";
+		try {
+			List<String> vCommand = new ArrayList(); 
+			if (cmd != null) {
+				int n = cmd.length;
+				for (int i = 0; i < n; i++) {
+					if (cmd[i] != null) {
+						vCommand.add(cmd[i]);
+					}
+				}
+			}
+			
+			ProcessBuilder processBuilder = new ProcessBuilder(vCommand);			
+			Process process = processBuilder.start();
+			StringBuilder sb = new StringBuilder();
+			BufferedReader reader =
+			new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+			res = sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.error(e.getMessage(), e);
+		}
+		return res;
+	}
+	
+	
+	
 	/**
 	 * Path parameters must use URL safe characters.
 	 */
