@@ -2073,11 +2073,11 @@ public class Util {
 	}
 
 
-	public static String executeBatSync(String[] cmd) {
-		return executeBatSync(cmd, null);
+	public static String executeBatSync_(String[] cmd) {
+		return executeBatSync_(cmd, null);
 	}
 	
-	public static String executeBatSync(String[] cmd, File fOutBuffers) {
+	public static String executeBatSync_(String[] cmd, File fOutBuffers) {
 		String res = "";
 		try {
 			List<String> vCommand = new ArrayList(); 
@@ -2113,7 +2113,7 @@ public class Util {
 	}
 
 
-	public static String executeBatAsync(String[] cmd) {
+	public static String executeBatSync(String[] cmd) {
 		String res = "";
 		try {
 			List<String> vCommand = new ArrayList(); 
