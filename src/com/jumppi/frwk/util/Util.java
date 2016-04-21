@@ -2073,11 +2073,11 @@ public class Util {
 	}
 
 
-	public static String executeBatSync_(String[] cmd) {
-		return executeBatSync_(cmd, null);
+	public static String executeBatSync(String[] cmd) {
+		return executeBatSync(cmd, null);
 	}
 	
-	public static String executeBatSync_(String[] cmd, File fOutBuffers) {
+	public static String executeBatSync(String[] cmd, File fOutBuffers) {
 		String res = "";
 		try {
 			List<String> vCommand = new ArrayList(); 
@@ -2113,7 +2113,11 @@ public class Util {
 	}
 
 
-	public static String executeBatSync(String[] cmd) {
+	public static String executeBatAsync(String[] cmd) {
+		return executeBatAsync(cmd, null);
+	}
+	
+	public static String executeBatAsync(String[] cmd, File fOutBuffers) {
 		String res = "";
 		try {
 			List<String> vCommand = new ArrayList(); 
@@ -2127,7 +2131,20 @@ public class Util {
 			}
 			
 			ProcessBuilder processBuilder = new ProcessBuilder(vCommand);			
+			if (fOutBuffers != null) {
+			    processBuilder.redirectErrorStream(true);
+			    processBuilder.redirectOutput(fOutBuffers);			
+			}
 			Process process = processBuilder.start();
+			StringBuilder sb = new StringBuilder();
+			BufferedReader reader =
+			new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line);
+			}
+//			process.waitFor();			
+			res = sb.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.error(e.getMessage(), e);
