@@ -133,13 +133,19 @@ public class JSON {
 	}
 	
 	
-	public boolean getBoolean() {
-		boolean res = false;
+	public boolean getBoolean(boolean defaultValue) {
+		boolean res = defaultValue;
 		if (obj != null) {
 			res = obj.getAsBoolean();
 		}
 		return res;
 	}
+
+	
+	public boolean getBoolean() {
+		return getBoolean(false);
+	}
+	
 	
 	public java.util.Date getDate() {
 		java.util.Date res = new java.util.Date();

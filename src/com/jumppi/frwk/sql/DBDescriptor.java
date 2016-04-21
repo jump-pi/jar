@@ -103,14 +103,14 @@ public class DBDescriptor {
     public String buildUrl() {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + dbName + "?" + params;
-        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optDbName(dbName) + optPort(port) + optParams(params) + optLocalDbName(localDbName);
+        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optPort(port) + optDbName(dbName) + optParams(params) + optLocalDbName(localDbName);
         return res;
     }
 
 	public String buildUrl(String nameDb) {
         String res = "";
 //        res = protocol + "://" + server + ":" + port + "/" + name + "?" + params;
-        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optDbName(nameDb) + optPort(port) + optParams(params);
+        res = protocol + optSubprotocol(subprotocol) + optServer(server) + optPort(port) + optDbName(nameDb) + optParams(params);
         return res;
     }
 

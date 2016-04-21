@@ -57,7 +57,7 @@ public class DB {
     }
     
     protected DB(String idCon) {
-        // Protected para evitar new BD() externos
+        // Protected para evitar new DB() externos
         this.idCon = idCon;
     }
 
@@ -127,7 +127,7 @@ public class DB {
             String urldb = gDbMap.get(idCon).buildUrl();
 
             Thread t = Thread.currentThread();
-            Log.debug("#USE  (BD): t.hash = " + t.hashCode()
+            Log.debug("#USE  (DB): t.hash = " + t.hashCode()
                     + ", con.hash = " + con.hashCode() + " " + con.toString()
                     + "user = |" + user + "|, pass = |******|, driver = |" + driv + "|, url = |" + urldb + "|");
         }
@@ -166,7 +166,7 @@ public class DB {
             }
         } catch (Exception e) {
             throw new SignalException(
-                    "Ooops en BD.getNewConnection(). driver = |" + driver
+                    "Ooops en DB.getNewConnection(). driver = |" + driver
                     + "|, url = |" + url + "| username = |******|, pass = |******|", e);
         }
         return con;
@@ -194,9 +194,9 @@ public class DB {
 
     public static void close(String idCon) {
         Thread t = Thread.currentThread();        
-        DB bd = DB.getInstance(idCon);
-        if (bd != null) {
-            Connection con = bd.getConnection();
+        DB db = DB.getInstance(idCon);
+        if (db != null) {
+            Connection con = db.getConnection();
 
             if (con != null) {
                 if (monitorDB) {
@@ -217,7 +217,7 @@ public class DB {
                 } catch (Exception ex) {
                 }
             }
-            bd.tConMap.get().remove(idCon);
+            db.tConMap.get().remove(idCon);
         }
 
     }
@@ -235,7 +235,7 @@ public class DB {
             Connection con = getConnection();
             con.setAutoCommit(false);
         } catch (Exception e) {
-            throw new SignalException("Error in BD.beginTrans()", e);
+            throw new SignalException("Error in DB.beginTrans()", e);
         }
     }
 
@@ -246,7 +246,7 @@ public class DB {
             con.setAutoCommit(true);
 
         } catch (Exception e) {
-            throw new SignalException("Error in BD.commitTrans()", e);
+            throw new SignalException("Error in DB.commitTrans()", e);
         }
     }
 
@@ -255,7 +255,7 @@ public class DB {
             Connection con = getConnection();
             con.rollback();
         } catch (Exception e) {
-            throw new SignalException("Error in BD.rollbackTrans()", e);
+            throw new SignalException("Error in DB.rollbackTrans()", e);
         }
     }
 
@@ -480,7 +480,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getCount()]");
+                        + " [DB.getCount()]");
             }
             rs = pstmt.executeQuery();
             rs.next();
@@ -576,7 +576,7 @@ public class DB {
         Statement stmt = null;
         ResultSet rs = null;
 
-        // String query = BD.noDel(query0);
+        // String query = DB.noDel(query0);
         try {
             stmt = createStatement();
             rs = stmt.executeQuery(query);
@@ -595,7 +595,7 @@ public class DB {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // String query = BD.noDel(query0);
+        // String query = DB.noDel(query0);
         try {
             pstmt = prepareStatement(pquery);
             rs = pstmt.executeQuery();
@@ -614,7 +614,7 @@ public class DB {
         Statement stmt = null;
         ResultSet rs = null;
 
-        // String query = BD.noDel(query0);
+        // String query = DB.noDel(query0);
         try {
             stmt = createStatement();
             rs = stmt.executeQuery(query);
@@ -633,7 +633,7 @@ public class DB {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // String query = BD.noDel(query0);
+        // String query = DB.noDel(query0);
         try {
             pstmt = prepareStatement(pquery);
             rs = pstmt.executeQuery();
@@ -784,7 +784,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getDTOs()]");
+                        + " [DB.getDTOs()]");
             }
             rs = pstmt.executeQuery();
             int i = 0;
@@ -822,7 +822,7 @@ public class DB {
         try {
             stmt = createStatement();
             if (monitorDB) {
-            	Log.debug(Util.nvl(query) + " [BD.getDTO()]");
+            	Log.debug(Util.nvl(query) + " [DB.getDTO()]");
             }
             rs = stmt.executeQuery(query);
             rs.next();
@@ -865,7 +865,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getDTO()]");
+                        + " [DB.getDTO()]");
             }
             rs = pstmt.executeQuery();
             if (rs.next()) {
@@ -905,7 +905,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getDTO()]");
+                        + " [DB.getDTO()]");
             }
             rs = pstmt.executeQuery();
             rs.next();
@@ -992,7 +992,7 @@ public class DB {
         try {
             stmt = createStatement();
             if (monitorDB) {
-            	Log.debug(Util.nvl(query) + " [BD.getJSON()]");
+            	Log.debug(Util.nvl(query) + " [DB.getJSON()]");
             }
             rs = stmt.executeQuery(query);
             rs.next();
@@ -1029,7 +1029,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getJSON()]");
+                        + " [DB.getJSON()]");
             }
             rs = pstmt.executeQuery();
             rs.next();
@@ -1130,7 +1130,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getDTOs()]");
+                        + " [DB.getDTOs()]");
             }
             rs = pstmt.executeQuery();
 
@@ -1166,7 +1166,7 @@ public class DB {
         try {
             stmt = createStatement();
             if (monitorDB) {
-            	Log.debug(Util.nvl(query) + " [BD.getEntities()]");
+            	Log.debug(Util.nvl(query) + " [DB.getEntities()]");
             }
             rs = stmt.executeQuery(query);
             vObj = new Bag(this.getClass());
@@ -1203,7 +1203,7 @@ public class DB {
             }
             if (monitorDB) {
             	Log.debug(Util.nvl(pquery) + " " + dumpParams(params)
-                        + " [BD.getEntities()]");
+                        + " [DB.getEntities()]");
             }
             rs = pstmt.executeQuery();
             vObj = new Bag(this.getClass());
@@ -1405,7 +1405,7 @@ public class DB {
             cstmt = prepareCall(nameStored);
             if (monitorDB) {
             	Log.debug(Util.nvl(nameStored)
-                        + " [BD.ejecutarSrored()]");
+                        + " [DB.ejecutarSrored()]");
             }
             res = cstmt.execute();
         } catch (Exception ex) {
