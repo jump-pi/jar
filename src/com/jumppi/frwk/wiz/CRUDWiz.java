@@ -1616,11 +1616,10 @@ public class CRUDWiz extends JFrame {
     }
 } 
 
-/**
- * **********************
+/*************************
  public Article findByCode(String value){ 
  	Client res = null; 
- 	DB dB = DB.getInstance("dbname"); 
+ 	DB db = DB.getInstance(idCon); 
  	String pquery = " select * from articles where code = ? ";
  	List params = new ArrayList(); 
  	params.add(value); 
@@ -1630,7 +1629,7 @@ public class CRUDWiz extends JFrame {
  
  public Collection<Article> findByDescriptionFragment(String value){
  	Collection vRes = null; 
- 	DB db = DB.getInstance(); 
+ 	DB db = DB.getInstance(idCon); 
  	String pquery = " select * from articles where description like ? "; 
  	List params = new ArrayList();
  	params.add("%" + value + "%"); 
