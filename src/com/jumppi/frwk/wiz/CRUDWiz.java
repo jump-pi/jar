@@ -1150,7 +1150,8 @@ public class CRUDWiz extends JFrame {
         int n = getFieldsCountTable();
         for (int i = 0; i < n; i++) {
             if (getField(i).toUpperCase().equals("DEL")) {
-                p.println("  protected " + getFieldType(i) + " " + getFieldFirstLowercaseHungarian(i) + " = \"N\";");
+//                p.println("  protected " + getFieldType(i) + " " + getFieldFirstLowercaseHungarian(i) + " = \"N\";");
+                p.println("  protected " + getFieldType(i) + " " + getFieldFirstLowercaseHungarian(i) + " = 0;");
             } else {
                 p.println("  protected " + getFieldType(i) + " " + getFieldFirstLowercaseHungarian(i) + ";");
             }
