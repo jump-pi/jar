@@ -138,6 +138,12 @@ public class Util {
 	}
 
 
+	public static void setValueOfAttributes(List vObj, String name, Object value) {
+		for (Object obj : vObj) {
+			Util.setValueOfAttribute(obj, "idCon", value);
+		}
+	}
+	
 	public static void setValueOfAttribute(Object obj, String name, Object value) {
 		setValueOfAttribute(obj, name, value, false);
 	}
