@@ -18,7 +18,7 @@ public class DB {
     protected static Hashtable<String, DBDescriptor> gDbMap = null;
     protected static ThreadLocal<HashMap<String, Connection>> tConMap;
     protected static boolean monitorDB = false;
-    protected final String idCon;
+    protected String idCon = "";
     protected static IDBConfig dbConfig = null;
     protected static String dbUcsimName = "";
 	protected static String dbUcsimUserame = "";
@@ -721,6 +721,9 @@ public class DB {
             while (i < (from + offset) && rs.next()) {
                 i++;
                 Object dto = getDTO(dtoClass, rs);
+                if (dto != null) {
+                	Util.setValueOfAttribute(dto, "_idCon", idCon);
+                }
                 vDtos.add(dto);
                 j++;
             }
@@ -797,6 +800,9 @@ public class DB {
             while (i < (from + offset) && rs.next()) {
                 i++;
                 Object dto = getDTO(vDtoClass, discrim, vDiscrims, rs);                
+                if (dto != null) {
+                	Util.setValueOfAttribute(dto, "_idCon", idCon);
+                }
                 vDtos.add(dto);
                 j++;
             }
@@ -840,6 +846,9 @@ public class DB {
                 stmt.close();
             } catch (Exception ex) {
             }
+        }
+        if (result != null) {
+        	Util.setValueOfAttribute(result, "_idCon", idCon);
         }
         return result;
     }
@@ -887,6 +896,9 @@ public class DB {
             } catch (Exception ex) {
             }
         }
+        if (result != null) {
+        	Util.setValueOfAttribute(result, "_idCon", idCon);
+        }
         return result;
     }
 
@@ -923,6 +935,9 @@ public class DB {
                 pstmt.close();
             } catch (Exception ex) {
             }
+        }
+        if (result != null) {
+        	Util.setValueOfAttribute(result, "_idCon", idCon);
         }
         return result;
     }
@@ -973,7 +988,9 @@ public class DB {
                         valor = rs.getObject(k);
                     }
                     String attrHung = Util.firstLowercaseHungarian(attr);
-                    Util.setValueOfAttribute(dto, attrHung, valor);
+                    if (dto != null) {
+                    	Util.setValueOfAttribute(dto, attrHung, valor);
+                    }
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -1173,6 +1190,9 @@ public class DB {
             vObj.setEntityClasses(entityClasses);
             vObj.setRs(rs);
             res = vObj;
+            if (res != null) {
+            	Util.setValueOfAttribute(res, "_idCon", idCon);
+            }
         } catch (Exception e) {
             throw new SignalException(e + " |" + query + "|", e);
         }
@@ -1212,6 +1232,9 @@ public class DB {
             vObj.setValuesDiscriminator(vDiscrims);
             vObj.setRs(rs);
             res = vObj;
+            if (res != null) {
+            	Util.setValueOfAttribute(res, "_idCon", idCon);
+            }
         } catch (Exception e) {
             throw new SignalException(e + " |" + pquery + "|", e);
         }

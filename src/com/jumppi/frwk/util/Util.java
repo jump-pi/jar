@@ -159,6 +159,9 @@ public class Util {
 		try {
 			classObj = obj.getClass();
 			f = getField(classObj, name);
+			if (f == null) {
+				throw new SignalException("Field " + name + " not found in " + classObj.getName());
+			}
 			classAttr = (Class) f.getGenericType();
 			classValue = value.getClass();
 
@@ -193,13 +196,15 @@ public class Util {
 			}
 
 			invokeSetter(obj, name, val);
+		} catch (SignalException e) {
+			throw e;
 		} catch (Exception e0) {
 			try {
 				f.set(obj, val);
 			} catch (Exception e) {
 				throw new SignalException(e.getMessage() + "."
-						+ e.getMessage() + "Util.setValueOfAttribute(" + name + ", "
-						+ value + ")");
+						+ e.getMessage() + "Util.setValueOfAttribute(" + obj + "," + name + ", "
+						+ value + "," + showInDates + ")");
 			}
 		}
 	}
@@ -215,7 +220,7 @@ public class Util {
 				res = (T) camp.get(obj);
 			} catch (Exception e) {
 				throw new SignalException(e.getMessage() + "."
-						+ e.getMessage() + "Util.getValueOfAttribute(" + attr
+						+ e.getMessage() + "Util.getValueOfAttribute(" + obj + "," + attr
 						+ ")");
 			}
 		}

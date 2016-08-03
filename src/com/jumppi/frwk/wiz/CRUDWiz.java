@@ -527,17 +527,14 @@ public class CRUDWiz extends JFrame {
         p.println("import " + getPackageName() + ".wiz.*;");
         p.println("import com.jumppi.frwk.sql.DB;");
         p.println("");
-        p.println("public class " + getClassName() + "Dic extends " + getClassName() + "DicWiz");
-        p.println("{");
+        p.println("public class " + getClassName() + "Dic extends " + getClassName() + "DicWiz {");
         p.println("");
-        p.println("  protected " + getClassName() + "Dic(String idCon) ");
-        p.println("  {");
+        p.println("  protected " + getClassName() + "Dic(String idCon) {");
         p.println("    super(idCon);");
         p.println("  }");
         p.println("");
 
-        p.println("  public static " + getClassName() + "Dic getInstance(String idCon)");
-        p.println("  {");
+        p.println("  public static " + getClassName() + "Dic getInstance(String idCon) {");
         p.println("    return new " + getClassName() + "Dic(idCon);");
         p.println("  }");
         p.println("}");
@@ -602,9 +599,8 @@ public class CRUDWiz extends JFrame {
         p.println(" ");
         p.println("*/");
 
-        p.println("public class " + getClassName() + "DicWiz");
-        p.println("{");
-        p.println("	  protected String idCon;");
+        p.println("public class " + getClassName() + "DicWiz {");
+        p.println("	 protected String _idCon;");
         p.println("	");
         p.println("	");
 
@@ -636,7 +632,7 @@ public class CRUDWiz extends JFrame {
 
         p.println("    protected " + getClassName() + "DicWiz(String idCon) ");
         p.println("    {");
-        p.println("      this.idCon = idCon;");
+        p.println("      this._idCon = idCon;");
         p.println("    }");
         p.println("	");
 
@@ -716,14 +712,12 @@ public class CRUDWiz extends JFrame {
         if (isGeneratedKeys()) {
 
             p.println("  ");
-            p.println("  public " + getClassName() + " create" + getClassName() + "()");
-            p.println("  {");
+            p.println("  public " + getClassName() + " create" + getClassName() + "() {");
             p.println("    return create" + getClassName() + "(true);");
             p.println("  }");
             p.println("  ");
-            p.println("  public " + getClassName() + " create" + getClassName() + "(boolean persisted)");
-            p.println("  {");
-            p.println("    " + getClassName() + "Dic vObj = " + getClassName() + "Dic.getInstance(idCon);");
+            p.println("  public " + getClassName() + " create" + getClassName() + "(boolean persisted) {");
+            p.println("    " + getClassName() + "Dic vObj = " + getClassName() + "Dic.getInstance(_idCon);");
             p.println("    " + getClassName() + " obj = new " + getClassName() + "();");
             p.println("    if (persisted)");
             p.println("      vObj.save(obj);");
@@ -733,14 +727,13 @@ public class CRUDWiz extends JFrame {
 
 			// CREATE RECORD
             p.println("  ");
-            p.println("  public int createRecord(" + getClassName() + " obj)");
-            p.println("  {");
+            p.println("  public int createRecord(" + getClassName() + " obj) {");
             p.println("    int lastId = 0;");
             p.println("  ");
             p.println("    try");
             p.println("	{");
 
-            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
 
             p.println("		List params = new ArrayList();");
 
@@ -796,8 +789,7 @@ public class CRUDWiz extends JFrame {
 
 			// UPDATE RECORD
             p.println("  ");
-            p.println("  public int updateRecord(" + getClassName() + " obj)");
-            p.println("  {");
+            p.println("  public int updateRecord(" + getClassName() + " obj) {");
             p.println("	int res = 0;");
             p.println("	");
             p.println("    try");
@@ -832,7 +824,7 @@ public class CRUDWiz extends JFrame {
             p.println("		params.add(obj.get" + getFieldFirstUppercaseHungarian(colId)
                     + "()); ");
             p.println("		");
-            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
             p.println("		res = db.executeSQL(queryUpdateRecord, params);");
             p.println("	}");
             p.println("	catch (Exception e)");
@@ -845,24 +837,21 @@ public class CRUDWiz extends JFrame {
             p.println("  ");
 
 			// DELETE RECORD
-            p.println("  public int deleteRecord(" + getClassName() + " obj)");
-            p.println("  {");
+            p.println("  public int deleteRecord(" + getClassName() + " obj) {");
             p.println("    int idInt = obj.getIdInt();");
             p.println("    return deleteRecord(idInt);");
             p.println("  }");
             p.println("  ");
 
             p.println("  ");
-            p.println("  public int remove(" + getClassName() + " obj)");
-            p.println("  {");
+            p.println("  public int remove(" + getClassName() + " obj) {");
             p.println("    return deleteRecord(obj);");
             p.println("  }");
             p.println("  ");
 
             p.println("  ");
-            p.println("  public int removeById(String id)");
-            p.println("  {");
-            p.println("    " + getClassName() + "Dic objd = " + getClassName() + "Dic.getInstance(idCon);");
+            p.println("  public int removeById(String id) {");
+            p.println("    " + getClassName() + "Dic objd = " + getClassName() + "Dic.getInstance(_idCon);");
             p.println("    " + getClassName() + " obj = objd.findById(id);");
             p.println("    if (obj != null)");
             p.println("      return deleteRecord(obj);");
@@ -872,15 +861,14 @@ public class CRUDWiz extends JFrame {
             p.println("  ");
 
             p.println("  ");
-            p.println("  public int deleteRecord(int id)");
-            p.println("  {");
+            p.println("  public int deleteRecord(int id) {");
             p.println("	int res = 0;");
             p.println("	");
             p.println("	try");
             p.println("	{");
             p.println("		List params = new ArrayList();");
             p.println("		params.add(id);");
-            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
             p.println("		res = db.executeSQL(queryDeleteRecord, params);");
             p.println("	}");
             p.println("	catch (Exception e)");
@@ -894,23 +882,21 @@ public class CRUDWiz extends JFrame {
 
 			// DELETE RECORD LOGICALLY
             p.println("  ");
-            p.println("  public int deleteRecordLogically(" + getClassName() + " obj)");
-            p.println("  {");
+            p.println("  public int deleteRecordLogically(" + getClassName() + " obj) {");
             p.println("    int idInt = obj.getIdInt();");
             p.println("    return deleteRecordLogically(idInt);");
             p.println("  }");
             p.println("  ");
 
             p.println("  ");
-            p.println("  public int deleteRecordLogically(int id)");
-            p.println("  {");
+            p.println("  public int deleteRecordLogically(int id) {");
             p.println("		int res = 0;");
             p.println("		");
             p.println("		try");
             p.println("		{");
             p.println("			List params = new ArrayList();");
             p.println("			params.add(id);");
-            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+            p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
             p.println("			res = db.executeSQL(queryDeleteRecordLogically, params);");
             p.println("		}");
             p.println("		catch (Exception e)");
@@ -924,8 +910,7 @@ public class CRUDWiz extends JFrame {
 
 			// save
             p.println("  ");
-            p.println("  public int save(" + getClassName() + " dto)");
-            p.println("  {");
+            p.println("  public int save(" + getClassName() + " dto) {");
             p.println("    int res;");
             p.println("    if (dto.getIdInt() == 0)");
             p.println("	     res = createRecord(dto);");
@@ -936,8 +921,7 @@ public class CRUDWiz extends JFrame {
             p.println("  ");
 
             p.println("  ");
-            p.println("  public int saveAndFlush(" + getClassName() + " dto)");
-            p.println("  {");
+            p.println("  public int saveAndFlush(" + getClassName() + " dto) {");
             p.println("    return save(dto);");
             p.println("  }");
             p.println("  ");
@@ -947,7 +931,7 @@ public class CRUDWiz extends JFrame {
         p.println("    public boolean existsId(int id) {");
         p.println("        int cont = 0;");
         p.println("        try {");
-        p.println("            " + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("            " + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
         p.println("            String pquery = \"SELECT COUNT(" + getField(colId) +") FROM " + getTableName() + " WHERE " + getField(colId) + " = ?\";");
         p.println("            PreparedStatement st = db.prepareStatement(pquery);");
         p.println("            st.setInt(1, id);");
@@ -962,13 +946,13 @@ public class CRUDWiz extends JFrame {
         p.println("    }");
 
         p.println("  public int count(){");
-        p.println("  	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("  	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
         p.println("  	int res = db.getCount(queryFindAll);");
         p.println("  	return res;");
         p.println("  }");
 
         p.println("  public int countByFilter(QueryFilter qf){");
-        p.println("  	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("  	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
         p.println("  	String query = " + getDbClassName() + ".buildFilteredQuery(queryFindAll, qf);");
         p.println("  	int res = db.getCount(query);");
         p.println("		return res;");
@@ -982,16 +966,14 @@ public class CRUDWiz extends JFrame {
         p.println("	return findByFilter(dtoClass, null);");
         p.println("  }");
         p.println("  ");
-        p.println("  public Collection findByFilter(QueryFilter qf)");
-        p.println("  {");
+        p.println("  public Collection findByFilter(QueryFilter qf) {");
         p.println("		return findByFilter(" + getClassName() + ".class, qf);");
         p.println("  }");
         p.println("  ");
-        p.println("  public Collection findByFilter(Class dtoClass, QueryFilter qf)");
-        p.println("  {");
+        p.println("  public Collection findByFilter(Class dtoClass, QueryFilter qf) {");
         p.println("	Collection vObj = null;");
         p.println("	 ");
-        p.println("	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("	" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
 
         p.println("	String queryf = \"\";");
         p.println("	if (qf == null){");
@@ -1012,13 +994,12 @@ public class CRUDWiz extends JFrame {
         p.println("  ");
 
         p.println("  ");
-        p.println("  public " + getClassName() + " findById(Object id)");
-        p.println("  {");
+        p.println("  public " + getClassName() + " findById(Object id) {");
         p.println("	 " + getClassName() + " obj = null;");
         p.println("	 ");
         p.println("	   try");
         p.println("	   {");
-        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
 
         p.println("		PreparedStatement pstmt = db.prepareStatement(queryFindById);");
         p.println("		pstmt.setObject(1, id);");
@@ -1039,13 +1020,11 @@ public class CRUDWiz extends JFrame {
         p.println("  ");
 
         p.println("  ");
-        p.println("  public " + getClassName() + " findById(Object id, Class[] classes, String discrim, String[] discrims)");
-        p.println("  {");
+        p.println("  public " + getClassName() + " findById(Object id, Class[] classes, String discrim, String[] discrims) {");
         p.println("	 " + getClassName() + " obj = null;");
         p.println("	 ");
-        p.println("	   try");
-        p.println("	   {");
-        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("	   try {");
+        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
 
         p.println("		PreparedStatement pstmt = db.prepareStatement(queryFindById);");
         p.println("		pstmt.setObject(1, id);");
@@ -1066,13 +1045,13 @@ public class CRUDWiz extends JFrame {
         p.println("  ");
 
         p.println(" public void reseq" + getClassNamePlural() + "(int step){");
-        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(idCon);");
+        p.println("		" + getDbClassName() + " db = " + getDbClassName() + ".getInstance(_idCon);");
         p.println(" 	try {");
         p.println(" 		Statement stmt = db.createUpdatableStatement();");
         p.println(" 		String query = \"SELECT ORD FROM (\" + queryFindAll + \") T ORDER BY ORD\";");
         p.println(" 		ResultSet rs = stmt.executeQuery(query);");
         p.println(" 		int i = 0;");
-        p.println(" 		while (rs.next()){");
+        p.println(" 		while (rs.next()) {");
         p.println("				rs.updateInt(\"ord\", i);");
         p.println("				rs.updateRow();");
         p.println("				i += step;");
@@ -1085,21 +1064,18 @@ public class CRUDWiz extends JFrame {
         p.println(" }");
         p.println("");
 
-        p.println("  public void closeConnection()");
-        p.println("  {");
+        p.println("  public void closeConnection() {");
 
-        p.println("	   " + getDbClassName() + ".close(idCon);");
+        p.println("	   " + getDbClassName() + ".close(_idCon);");
 
         p.println("  }");
         p.println("");
 
-        p.println("  public static String getTableName()");
-        p.println("  {");
+        p.println("  public static String getTableName() {");
         p.println("    return \"" + getTableName() + "\";");
         p.println("  }");
         p.println("");
-        p.println("  public static String getFieldId()");
-        p.println("  {");
+        p.println("  public static String getFieldId() {");
         p.println("    return \"" + getField(colId) + "\";");
         p.println("  }");
         p.println("");
@@ -1114,8 +1090,7 @@ public class CRUDWiz extends JFrame {
         p.println("import " + getPackageName() + ".wiz.*;");
         p.println("");
 
-        p.println("public class " + getClassName() + " extends " + getClassName() + "Wiz");
-        p.println("{");
+        p.println("public class " + getClassName() + " extends " + getClassName() + "Wiz {");
         p.println("}");
         p.println("");
     }
@@ -1143,10 +1118,10 @@ public class CRUDWiz extends JFrame {
 
         p.println("");
 
-        p.println("public class " + getClassName() + "Wiz");
+        p.println("public class " + getClassName() + "Wiz {");
 
-        p.println("{");
-
+        p.println("    protected String _idCon = \"\";");
+        
         int n = getFieldsCountTable();
         for (int i = 0; i < n; i++) {
             if (getField(i).toUpperCase().equals("DEL")) {
@@ -1160,6 +1135,10 @@ public class CRUDWiz extends JFrame {
         p.println("");
         p.println("");
 
+        p.println("  public void set_idCon(String value) {");
+        p.println("    _idCon = value;");
+        p.println("  }");
+        
         // getters
         p.println("///////////////////////////////////////////////////////////");
         p.println("//  getters ");
@@ -1620,7 +1599,7 @@ public class CRUDWiz extends JFrame {
 /*************************
  public Article findByCode(String value){ 
  	Client res = null; 
- 	DB db = DB.getInstance(idCon); 
+ 	DB db = DB.getInstance(_idCon); 
  	String pquery = " select * from articles where code = ? ";
  	List params = new ArrayList(); 
  	params.add(value); 
@@ -1630,7 +1609,7 @@ public class CRUDWiz extends JFrame {
  
  public Collection<Article> findByDescriptionFragment(String value){
  	Collection vRes = null; 
- 	DB db = DB.getInstance(idCon); 
+ 	DB db = DB.getInstance(_idCon); 
  	String pquery = " select * from articles where description like ? "; 
  	List params = new ArrayList();
  	params.add("%" + value + "%"); 
