@@ -1,5 +1,6 @@
 package com.jumppi.frwk.sql;
 
+import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.*;
 
@@ -721,9 +722,6 @@ public class DB {
             while (i < (from + offset) && rs.next()) {
                 i++;
                 Object dto = getDTO(dtoClass, rs);
-                if (dto != null) {
-                	Util.setValueOfAttribute(dto, "_idCon", idCon);
-                }
                 vDtos.add(dto);
                 j++;
             }
@@ -800,9 +798,6 @@ public class DB {
             while (i < (from + offset) && rs.next()) {
                 i++;
                 Object dto = getDTO(vDtoClass, discrim, vDiscrims, rs);                
-                if (dto != null) {
-                	Util.setValueOfAttribute(dto, "_idCon", idCon);
-                }
                 vDtos.add(dto);
                 j++;
             }
@@ -846,9 +841,6 @@ public class DB {
                 stmt.close();
             } catch (Exception ex) {
             }
-        }
-        if (result != null) {
-        	Util.setValueOfAttribute(result, "_idCon", idCon);
         }
         return result;
     }
@@ -896,9 +888,6 @@ public class DB {
             } catch (Exception ex) {
             }
         }
-        if (result != null) {
-        	Util.setValueOfAttribute(result, "_idCon", idCon);
-        }
         return result;
     }
 
@@ -935,9 +924,6 @@ public class DB {
                 pstmt.close();
             } catch (Exception ex) {
             }
-        }
-        if (result != null) {
-        	Util.setValueOfAttribute(result, "_idCon", idCon);
         }
         return result;
     }
@@ -1190,9 +1176,6 @@ public class DB {
             vObj.setEntityClasses(entityClasses);
             vObj.setRs(rs);
             res = vObj;
-            if (res != null) {
-            	Util.setValueOfAttribute(res, "_idCon", idCon);
-            }
         } catch (Exception e) {
             throw new SignalException(e + " |" + query + "|", e);
         }
@@ -1232,9 +1215,6 @@ public class DB {
             vObj.setValuesDiscriminator(vDiscrims);
             vObj.setRs(rs);
             res = vObj;
-            if (res != null) {
-            	Util.setValueOfAttribute(res, "_idCon", idCon);
-            }
         } catch (Exception e) {
             throw new SignalException(e + " |" + pquery + "|", e);
         }
@@ -1477,5 +1457,20 @@ public class DB {
         }
         return dbName;
     }
+    
+    public static String getIdConFrom(Object dtoOrEntity) {
+    	String res = "";
+    	try {
+			String fullName = dtoOrEntity.getClass().getName();
+			String fullNameDic = fullName + "Dic";
+			Class c = Class.forName(fullNameDic);
+			Field fld = Util.getField(c, "_idCon");
+			String idCon = fld.get(dtoOrEntity).toString();
+			res = Util.nvl(idCon);
+		} catch (Exception e) {
+		}
+        return res;
+    }
+
 }
 

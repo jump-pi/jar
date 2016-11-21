@@ -529,14 +529,33 @@ public class CRUDWiz extends JFrame {
         p.println("");
         p.println("public class " + getClassName() + "Dic extends " + getClassName() + "DicWiz {");
         p.println("");
+
+        p.println("  protected " + getClassName() + "Dic() {");
+        p.println("    super();");
+        p.println("  }");
+        p.println("");
+        
+        p.println("  public static " + getClassName() + "Dic getInstance() {");
+        p.println("    return new " + getClassName() + "Dic();");
+        p.println("  }");
+        p.println(" ");
+        
+        p.println("  /**");
+        p.println("  *@deprecated");
+        p.println("  */");
         p.println("  protected " + getClassName() + "Dic(String idCon) {");
         p.println("    super(idCon);");
         p.println("  }");
         p.println("");
 
+        p.println("  /**");
+        p.println("  *@deprecated");
+        p.println("  */");
         p.println("  public static " + getClassName() + "Dic getInstance(String idCon) {");
         p.println("    return new " + getClassName() + "Dic(idCon);");
         p.println("  }");
+        p.println(" ");
+        
         p.println("}");
         p.println("");
     }
@@ -600,7 +619,7 @@ public class CRUDWiz extends JFrame {
         p.println("*/");
 
         p.println("public class " + getClassName() + "DicWiz {");
-        p.println("	 protected String _idCon;");
+        p.println("	 protected static String _idCon = \"\";");
         p.println("	");
         p.println("	");
 
@@ -630,12 +649,28 @@ public class CRUDWiz extends JFrame {
             p.println("	");
         }
 
-        p.println("    protected " + getClassName() + "DicWiz(String idCon) ");
-        p.println("    {");
-        p.println("      this._idCon = idCon;");
+        p.println("    /**");
+        p.println("    *@deprecated");
+        p.println("    */");
+        p.println("    protected " + getClassName() + "DicWiz(String idCon) {");
+        p.println("      _idCon = idCon;");
         p.println("    }");
         p.println("	");
 
+        p.println("    protected " + getClassName() + "DicWiz() {");
+        p.println("    }");
+        p.println("	");
+        
+        p.println("    public static void setIdCon(String value) {");
+        p.println("      _idCon = value;");
+        p.println("    }");
+        p.println("	");
+        
+        p.println("    public static String getIdCon() {");
+        p.println("      return _idCon;");
+        p.println("    }");
+        p.println("	");
+        
         if (isGeneratedKeys()) {
             p.println("	public static final String queryCreateRecord = ");
             p.println("      \"INSERT INTO " + getTableName() + "(\" + ");
@@ -1120,8 +1155,6 @@ public class CRUDWiz extends JFrame {
 
         p.println("public class " + getClassName() + "Wiz {");
 
-        p.println("    protected String _idCon = \"\";");
-        
         int n = getFieldsCountTable();
         for (int i = 0; i < n; i++) {
             if (getField(i).toUpperCase().equals("DEL")) {
@@ -1135,10 +1168,6 @@ public class CRUDWiz extends JFrame {
         p.println("");
         p.println("");
 
-        p.println("  public void set_idCon(String value) {");
-        p.println("    _idCon = value;");
-        p.println("  }");
-        
         // getters
         p.println("///////////////////////////////////////////////////////////");
         p.println("//  getters ");

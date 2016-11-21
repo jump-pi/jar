@@ -1,13 +1,10 @@
 package com.jumppi.frwk.util;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -48,8 +45,6 @@ import org.weborganic.furi.URICoder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -63,8 +58,6 @@ import com.jumppi.frwk.sim.Ucsim;
 import com.jumppi.frwk.sim.UcsimDic;
 import com.jumppi.frwk.sql.Bag;
 import com.jumppi.frwk.sql.DB;
-
-import java.net.URLConnection;
 
 
 public class Util {
