@@ -40,7 +40,7 @@ public class CtlUriRoute {
 			if (uriMap == null) {
 				uriMap = new HashMap<String, String>();
 				if (uriRoute == null) {
-					throw new SignalException(99, "No uriroute-class defined (check web.xml");
+					throw new SignalException(99, "No uriroute-class defined (check web.xml)");
 				} else {
 					uriRoute.setup(uriMap);
 				}
@@ -72,14 +72,18 @@ public class CtlUriRoute {
 		}
 		
 		URIResolver resolver = new URIResolver(escapedUrl + "|" + verb);
+		int resolvedCount = 0;
 		for (Object otpl : vUriTemplates) {
 			String tpl = (String) otpl;
 			URIResolveResult result = resolver.resolve(new URIPattern(tpl));
 			String status = result.getStatus().toString();
 			if (status.equals("RESOLVED")) {
 				res = tpl;
-				break;
+				resolvedCount++;			
 			}
+		}
+		if (resolvedCount != 1) {
+			throw new SignalException(99, "URI conflict");
 		}
 		return res;
 	}
@@ -134,6 +138,7 @@ public class CtlUriRoute {
 		loadArraySim();
 		
 		URIResolver resolver = new URIResolver(escapedUrl + "|" + verb);
+		int resolvedCount = 0;
 		for (Object otpl : vUriTemplatesSim) {
 			String tpl = (String) otpl;
 			URIResolveResult result = resolver.resolve(new URIPattern(tpl));
@@ -141,9 +146,13 @@ public class CtlUriRoute {
 //			Log.debug("|" + tpl + "| =>  |" + status + "|");
 			if (status.equals("RESOLVED")) {
 				res = tpl;
-				break;
+				resolvedCount++;
 			}
 		}
+		if (resolvedCount != 1) {
+			throw new SignalException(99, "URI conflict");
+		}
+		
 		return res;
 	}
     
