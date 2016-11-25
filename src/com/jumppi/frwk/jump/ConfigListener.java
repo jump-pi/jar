@@ -35,6 +35,8 @@ public class ConfigListener implements ServletContextListener {
 
 			String dbUcsimDbName = ctx.getInitParameter("dbucsim-db-name");
 			DB.setDbUcsimName(dbUcsimDbName);
+			String dbUcsimDbPort = ctx.getInitParameter("dbucsim-db-port");
+			DB.setDbUcsimName(dbUcsimDbPort);
 			String dbUcsimUsername = ctx.getInitParameter("dbucsim-username");
 			DB.setDbUcsimUserame(dbUcsimUsername);
 			String dbUcsimPassword = ctx.getInitParameter("dbucsim-password");

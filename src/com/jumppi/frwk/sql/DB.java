@@ -22,6 +22,7 @@ public class DB {
     protected String idCon = "";
     protected static IDBConfig dbConfig = null;
     protected static String dbUcsimName = "";
+    protected static int dbUcsimPort = 3306;
 	protected static String dbUcsimUserame = "";
     protected static String dbUcsimPassword = "";
     
@@ -37,6 +38,18 @@ public class DB {
 		DB.dbUcsimName = dbUcsimName;
 	}
 
+    public static int getDbUcsimPort() {
+		return dbUcsimPort;
+	}
+
+	public static void setDbUcsimPort(int dbUcsimPort) {
+		DB.dbUcsimPort = dbUcsimPort;
+	}
+	
+	public static void setDbUcsimPort(String dbUcsimPort) {
+		DB.dbUcsimPort = Util.parseInt(dbUcsimPort);
+	}
+	
 	public static String getDbUcsimUserame() {
 		return dbUcsimUserame;
 	}
@@ -86,7 +99,7 @@ public class DB {
     	if (gDbMap == null) {
             gDbMap = new Hashtable<String, DBDescriptor>();
             if (dbConfig != null) {
-                dbConfig.setup(gDbMap, DB.getDbUcsimName(), DB.getDbUcsimUserame(), DB.getDbUcsimPassword());
+                dbConfig.setup(gDbMap, DB.getDbUcsimName(), DB.getDbUcsimPort(), DB.getDbUcsimUserame(), DB.getDbUcsimPassword());
             }
     	}        
     	
